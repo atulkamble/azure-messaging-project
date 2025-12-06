@@ -59,6 +59,11 @@ az storage queue create \
 
 ### 4. **Deploy Consumer via Azure Function (Python)**
 
+```
+pip install -r requirements.txt
+python send_message.py 
+```
+
 `function_app.py`
 
 ```python
