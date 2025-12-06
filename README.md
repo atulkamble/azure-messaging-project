@@ -62,7 +62,6 @@ az storage queue create \
 ```
 pip install -r requirements.txt
 python send_message.py
-python delete_message.py 
 ```
 
 `function_app.py`
@@ -98,7 +97,10 @@ with ServiceBusClient.from_connection_string(conn_str) as client:
         sender.send_messages(msg)
         print("Message sent successfully!")
 ```
-
+```
+python delete_message.py 
+az group delete --resource-group messaging-rg
+```
 ---
 
 ## 📊 Terraform Automation
