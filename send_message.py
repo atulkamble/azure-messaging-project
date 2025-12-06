@@ -1,6 +1,11 @@
+import os
 from azure.servicebus import ServiceBusClient, ServiceBusMessage
 
-conn_str = "Endpoint=sb://cloudnautic-messaging-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=DOT0qI/T5xWRd+I//vnFy1ZizKhcnpGnT+ASbPm670A="
+# Get connection string from environment variable
+conn_str = os.getenv('SERVICEBUS_CONNECTION_STRING')
+if not conn_str:
+    raise ValueError("SERVICEBUS_CONNECTION_STRING environment variable is not set")
+
 queue_name = "orders-queue"
 
 with ServiceBusClient.from_connection_string(conn_str) as client:
