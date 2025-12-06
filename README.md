@@ -61,7 +61,8 @@ az storage queue create \
 
 ```
 pip install -r requirements.txt
-python send_message.py 
+python send_message.py
+python delete_message.py 
 ```
 
 `function_app.py`
