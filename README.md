@@ -8,7 +8,25 @@
 
 A **hands-on Azure Service Bus messaging system** demonstrating **secure message publishing and consumption** using Python. This project showcases enterprise messaging patterns with **environment variable-based security** and real-world best practices.
 
-## 🚀 Manual Setup & Run Instructions
+## � Security Notice
+
+⚠️ **IMPORTANT**: This project includes a `local.settings.json.template` file. To use it:
+1. Copy `local.settings.json.template` to `local.settings.json`
+2. Replace placeholder values with your actual Azure credentials
+3. **NEVER commit `local.settings.json` to git** - it's already in `.gitignore`
+4. Alternatively, use environment variables (recommended for production)
+
+## ✨ Features
+
+- 🎨 **Web UI** - Modern Streamlit interface for message management
+- 🖥️ **CLI** - Interactive command-line interface
+- 📤 **Send Messages** - Publish messages with custom properties
+- 📥 **Receive Messages** - Consume and process messages
+- 👀 **Peek Messages** - View messages without removing them
+- 🗑️ **Batch Delete** - Clean up queue efficiently
+- 📊 **Statistics** - Track message operations
+
+## �🚀 Manual Setup & Run Instructions
 
 ### Prerequisites
 - Azure CLI installed and logged in
@@ -58,9 +76,13 @@ az servicebus namespace authorization-rule keys list \
   --query "primaryConnectionString" -o tsv
 ```
 
-### Step 5: Set Environment Variable
+### Step 5: Configure Local Settings
 ```bash
-# Replace YOUR_CONNECTION_STRING with the output from Step 4
+# Copy the template file
+cp local.settings.json.template local.settings.json
+
+# Edit local.settings.json and replace YOUR_CONNECTION_STRING with the output from Step 4
+# Or set environment variable (recommended):
 export SERVICEBUS_CONNECTION_STRING="YOUR_CONNECTION_STRING"
 
 # For persistent setup, add to your shell profile (~/.zshrc or ~/.bashrc):
@@ -68,7 +90,26 @@ echo 'export SERVICEBUS_CONNECTION_STRING="YOUR_CONNECTION_STRING"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
+⚠️ **IMPORTANT**: Never commit `local.settings.json` with real credentials to git!
+
 ### Step 6: Run the Project
+
+#### Option A: Web UI (Recommended)
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the Streamlit web interface
+streamlit run app.py
+```
+Access the web UI at http://localhost:8501
+
+#### Option B: Command Line Interface
+```bash
+python cli.py
+```
+
+#### Option C: Individual Scripts
 ```bash
 # Send a message to the queue
 python send_message.py
